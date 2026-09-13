@@ -1,0 +1,19 @@
+# Runtime
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local state (sqlite store + bot metadata)
+tickets.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Local secrets/config overrides
+config.local.json
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
