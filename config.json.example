@@ -1,0 +1,106 @@
+{
+  "token": "DISCORD_TOKEN_PLACEHOLDER",
+  "proxy": "http://127.0.0.1:20171",
+  "guild_id": 1547936265062584370,
+  "panel_channel_id": 1547948635369508864,
+  "transcript_channel_id": 1548037293418221749,
+  "staff_role_ids": [
+    1547937156050456706,
+    1547936752256290876,
+    1547936861035429938
+  ],
+  "ticket_types": [
+    {
+      "id": "tech",
+      "name": "Техническая поддержка",
+      "description": "Технического плана, например проблемы работы",
+      "category_id": 1547967703392723136,
+      "fields": [
+        {
+          "id": "core",
+          "label": "Какое у вас ядро сервера?",
+          "placeholder": "vanilla / paper / forge / fabric",
+          "required": true
+        },
+        {
+          "id": "java",
+          "label": "Какая у вас версия Java?",
+          "placeholder": "11 / 17 / 21 / 25",
+          "required": true
+        },
+        {
+          "id": "minecraft",
+          "label": "Какая у вас версия Minecraft?",
+          "placeholder": "1.8 / 1.12.2 / другая",
+          "required": true
+        },
+        {
+          "id": "server_url",
+          "label": "Ссылка подключения к серверу",
+          "placeholder": "abcdef.mh.join-serv.ru",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot",
+      "name": "Решение проблем",
+      "description": "Решение проблем с серверами",
+      "category_id": 1548026134799720539,
+      "fields": [
+        {
+          "id": "core",
+          "label": "Какое у вас ядро сервера?",
+          "placeholder": "vanilla / paper / forge / fabric",
+          "required": true
+        },
+        {
+          "id": "java",
+          "label": "Какая у вас версия Java?",
+          "placeholder": "11 / 17 / 21 / 25",
+          "required": true
+        },
+        {
+          "id": "minecraft",
+          "label": "Какая у вас версия Minecraft?",
+          "placeholder": "1.8 / 1.12.2 / другая",
+          "required": true
+        },
+        {
+          "id": "server_url",
+          "label": "Ссылка подключения к серверу",
+          "placeholder": "abcdef.mh.join-serv.ru",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "Продажи",
+      "description": "Спонсорство, партнёрство и подобное",
+      "category_id": 1548028327204495430,
+      "fields": []
+    },
+    {
+      "id": "credits",
+      "name": "Пополнение кредитов",
+      "description": "Пополнить баланс кредитов за оплату",
+      "category_id": 1548028436910444575,
+      "fields": [
+        {
+          "id": "site_username",
+          "label": "Ваш ник на сайте",
+          "placeholder": "Введите ваш ник на сайте",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "Иное",
+      "description": "Вопросы, которые требуются реальной поддержки, не оффтоп",
+      "category_id": 1548028507190333441,
+      "fields": []
+    }
+  ]
+}
