@@ -17,4 +17,5 @@ config.local.json
 .idea/
 .vscode/
 .DS_Store
+.serena/
 config.json
