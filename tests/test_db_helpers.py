@@ -11,6 +11,8 @@ discord.py.
 import datetime
 import json
 
+import pytest
+
 
 # --- init_db ---------------------------------------------------------------
 
@@ -93,6 +95,18 @@ def test_get_ticket_by_channel_corrupt_fields(sql_db):
     assert ticket is not None
     assert ticket["fields"] == {}
     assert ticket["channel_id"] == 1001
+
+
+@pytest.mark.parametrize("fields_json", ["null", "[]", '"text"'])
+def test_get_ticket_by_channel_non_object_fields(sql_db, fields_json):
+    sql_db.Ticket.create(
+        channel_id=1001, guild_id=2002, user_id=3003,
+        ticket_type="tech", fields_json=fields_json,
+        status="open", created_at=datetime.datetime.now(datetime.timezone.utc),
+    )
+    ticket = sql_db.get_ticket_by_channel(1001)
+    assert ticket is not None
+    assert ticket["fields"] == {}
 
 
 def test_close_ticket_record_updates_status(sql_db):

@@ -92,6 +92,8 @@ def get_ticket_by_channel(channel_id: int) -> Optional[Dict[str, Any]]:
             fields = json.loads(rec.fields_json or "{}")
         except (json.JSONDecodeError, TypeError):
             fields = {}
+        if not isinstance(fields, dict):
+            fields = {}
         return {
             "ticket_id": rec.ticket_id,
             "channel_id": rec.channel_id,
