@@ -127,6 +127,14 @@ def test_close_ticket_record_missing_channel_is_silent(sql_db):
     # No exception == pass.
 
 
+def test_close_notice_escapes_mentions_in_user_reason(sql_db):
+    notice = sql_db.format_close_notice("<@1234>", "@everyone please look <@&5678> and <@9012>")
+    assert "@\u200beveryone" in notice
+    assert "<@\u200b&5678>" in notice
+    assert "<@\u200b9012>" in notice
+    assert "<@1234>" in notice  # The closer's intended mention remains active.
+
+
 # --- Config helpers --------------------------------------------------------
 
 

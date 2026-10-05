@@ -16,6 +16,7 @@ try:
 except ImportError:
     discord = types.ModuleType("discord")
     discord.Intents = types.SimpleNamespace(default=lambda: types.SimpleNamespace())
+    discord.utils = types.SimpleNamespace(escape_mentions=lambda text: text.replace("@", "@\u200b"))
     class _Color:
         @staticmethod
         def from_rgb(*a, **kw):

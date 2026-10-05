@@ -121,6 +121,15 @@ def close_ticket_record(channel_id: int, closed_by: int):
         print(f"Error updating ticket record: {e}")
 
 
+def format_close_notice(user_mention: str, reason: str) -> str:
+    """Keep untrusted close reasons from triggering Discord mentions."""
+    safe_reason = discord.utils.escape_mentions(reason)
+    # escape_mentions handles @everyone/@here, but not <@user>, <@&role>,
+    # or <#channel> syntax. Break those tokens in the untrusted reason too.
+    safe_reason = safe_reason.replace("<@", "<@\u200b").replace("<#", "<#\u200b")
+    return f"🔒 Тикет закрывается пользователем {user_mention}...\nПричина: *{safe_reason}*"
+
+
 def find_ticket_type_cfg(type_id: str) -> Optional[dict]:
     for tt in CONFIG.get("ticket_types", []):
         if tt["id"] == type_id:
@@ -346,7 +355,7 @@ class CloseConfirmModal(discord.ui.Modal, title="Закрытие тикета")
         ticket_data = get_ticket_by_channel(channel.id)
         reason_text = self.reason.value.strip() or "Не указана"
 
-        await channel.send(f"🔒 Тикет закрывается пользователем {interaction.user.mention}...\nПричина: *{reason_text}*")
+        await channel.send(format_close_notice(interaction.user.mention, reason_text))
 
         messages = []
         async for m in channel.history(limit=5000, oldest_first=True):
