@@ -83,14 +83,16 @@ def test_get_ticket_by_channel_unknown_returns_none(sql_db):
 
 
 def test_get_ticket_by_channel_corrupt_fields(sql_db):
-    """A bad fields_json blob must not crash the helper; returns empty dict."""
+    """A bad fields_json blob must not hide the otherwise valid ticket."""
     sql_db.Ticket.create(
         channel_id=1001, guild_id=2002, user_id=3003,
         ticket_type="tech", fields_json="{not json",
         status="open", created_at=datetime.datetime.now(datetime.timezone.utc),
     )
     ticket = sql_db.get_ticket_by_channel(1001)
-    assert ticket is None  # helper swallows the JSON error
+    assert ticket is not None
+    assert ticket["fields"] == {}
+    assert ticket["channel_id"] == 1001
 
 
 def test_close_ticket_record_updates_status(sql_db):

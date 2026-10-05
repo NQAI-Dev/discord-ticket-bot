@@ -88,13 +88,17 @@ def get_ticket_by_channel(channel_id: int) -> Optional[Dict[str, Any]]:
         rec = Ticket.get_or_none(Ticket.channel_id == channel_id)
         if not rec:
             return None
+        try:
+            fields = json.loads(rec.fields_json or "{}")
+        except (json.JSONDecodeError, TypeError):
+            fields = {}
         return {
             "ticket_id": rec.ticket_id,
             "channel_id": rec.channel_id,
             "guild_id": rec.guild_id,
             "user_id": rec.user_id,
             "ticket_type": rec.ticket_type,
-            "fields": json.loads(rec.fields_json or "{}"),
+            "fields": fields,
             "status": rec.status,
             "created_at": rec.created_at,
             "closed_at": rec.closed_at,
